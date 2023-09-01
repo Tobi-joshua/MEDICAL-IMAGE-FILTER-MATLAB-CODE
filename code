@@ -1,0 +1,53 @@
+% Enter the Scanned Image File (e.g .tif,.jpeg)
+image = imread('input');        % Please replace the 'input' with the image file.
+
+% Display the original image
+subplot(2, 2, 1);
+imshow(image);
+title('Original Image');
+
+% Apply a 5X5 low pass filter to smoothen the image
+Low_pass_filter = [1,1,1,1,1;1,1,1,1,1;1,1,1,1,1;1,1,1,1,1;1,1,1,1,1]/5;
+smoothed_image = conv2(Low_pass_filter, double(image));
+
+
+% Display the smoothed image
+subplot(2, 2, 2);
+imshow(smoothed_image);
+title('Smoothed Image');
+
+% Apply a 3X3 high pass filter to sharpen the image
+High_pass_filter = [-1,-1,-1;-1,9,-1;-1,-1,-1];
+sharpened_image = conv2(smoothed_image, double(High_pass_filter));
+
+
+% Display the sharpened image
+subplot(2, 2, 3);
+imshow(sharpened_image);
+title('Sharpened Image');
+
+% Apply an edge detection filter to detect the edges of the lungs
+edge_detection_filter = [-1,-1,-1;-1,5,-1;-1,-1,-1];
+edge_image = conv2(smoothed_image, double(edge_detection_filter));
+
+% Display the edge detection image
+subplot(2, 2, 4);
+edge(edge_image);
+title('Edge Detection Image');
+
+% Display the color bar showing the intensity
+colormap(gray);
+colorbar;
+
+% Remove pixels outside the range [200, 700]
+removed_pixels_image = smoothed_image;
+removed_pixels_image(removed_pixels_image < 200) = 0;
+removed_pixels_image(removed_pixels_image > 700) = 0;
+
+% Display the removed pixels image
+figure;
+imshow(removed_pixels_image);
+title('Removed Pixels Image');
+colormap(gray);
+colorbar;
+
