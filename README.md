@@ -1,2 +1,3 @@
 # MEDICAL-IMAGE-FILTER-CODE
 The code allows users to input a scanned medical image file (e.g. tif, .jpeg )
+This MATLAB script-file applies several filters to a CT scan image of a mouse lung to isolate and observe different tissues for lung cancer research. The program applies a 5x5 low pass filter, a 3x3 high pass filter, and a 3x3 edge detection filter to the original image. The filtered and unfiltered images are displayed in a figure with four subplots, including the original image, the smoothed image, the sharpened image, and the edge detection image. Additionally, an extra credit task is included, which removes pixels with intensities less than 200 and greater than 700 and displays the resulting image in a separate figure. 
